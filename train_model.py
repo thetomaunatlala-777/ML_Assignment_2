@@ -31,6 +31,8 @@ correlations = features.corrwith(labels).abs().sort_values(ascending=False)
 top_features = correlations.head(10).index
 X_selected = features[top_features]
 
+np.savetxt("top_features.txt", top_features, fmt='%d')
+
 
 # data split
 X_train, X_test, y_train, y_test = train_test_split(
