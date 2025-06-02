@@ -67,6 +67,9 @@ np.savetxt("model_intercept.txt", model.intercept_)
 y_pred = model.predict(X_test_scaled)
 
 
+from sklearn.metrics import f1_score
+f1 = f1_score(y_test, y_pred, average='weighted')
+
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Test accuracy: {accuracy:.4f}")
-
+print(f"Weighted F1 Score: {f1:.4f}")
