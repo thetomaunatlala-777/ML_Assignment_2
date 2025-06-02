@@ -1,3 +1,5 @@
+#classifyall.py
+
 import pandas as pd
 import numpy as np
 
@@ -12,10 +14,11 @@ model_intercept = np.loadtxt("model_intercept.txt")
 X_test = pd.read_csv("testdata.txt", header=None, sep=',')
 
 # impute with median
-columns_with_missing = [1, 5, 6, 7, 8, 14, 15, 17, 27, 34, 40]
-for col in columns_with_missing:
-    if col in X_test.columns:
+for col in X_test.columns:
+    if X_test[col].isnull().any():
         X_test[col] = X_test[col].fillna(X_test[col].median())
+
+
 
 # drop random words column if it is in testdata
 if X_test.shape[1] > 46:
