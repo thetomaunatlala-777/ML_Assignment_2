@@ -1,3 +1,5 @@
+#train_model.py
+
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -14,9 +16,11 @@ df = X.copy()
 df["label"] = y.values.ravel()
 
 # Impute missing values with median
-columns_with_missing = [1, 5, 6, 7, 8, 14, 15, 17, 27, 34, 40]
-for col in columns_with_missing:
-    df[col] = df[col].fillna(df[col].median())
+# Impute all columns that have missing values with their column median
+for col in df.columns:
+    if df[col].isnull().any():
+        df[col] = df[col].fillna(df[col].median())
+
 
 # Drop random words column if exists
 if df.shape[1] > 46:
